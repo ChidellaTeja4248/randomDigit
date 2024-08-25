@@ -6,59 +6,116 @@
     <title>Random Digit Generator</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #e3f2fd;
         }
+
         .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
+
+        h2 {
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #37474f;
+        }
+
         input {
-            margin: 5px;
+            width: calc(100% - 16px);
             padding: 10px;
+            border: 1px solid #b0bec5;
+            border-radius: 6px;
             font-size: 16px;
+            color: #37474f;
+            background-color: #f5f5f5;
+            outline: none;
         }
+
+        input:focus {
+            border-color: #00796b;
+            background-color: #ffffff;
+        }
+
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
+            border: none;
+            background-color: #00796b;
+            color: #ffffff;
+            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
         }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
         #result {
-            margin-top: 20px;
-            font-size: 24px;
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #00796b;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Random Digit Generator</h1>
-        <div>
+        <h2>Random Digit Generator</h2>
+        <div class="input-group">
             <label for="minValue">Minimum Value:</label>
-            <input type="number" id="minValue" required>
+            <input type="number" id="minValue" placeholder="Enter minimum value">
         </div>
-        <div>
+        <div class="input-group">
             <label for="maxValue">Maximum Value:</label>
-            <input type="number" id="maxValue" required>
+            <input type="number" id="maxValue" placeholder="Enter maximum value">
         </div>
-        <button onclick="generateRandomNumber()">Generate</button>
+        <button onclick="generateRandomNumber()">Generate Random Number</button>
         <div id="result"></div>
     </div>
 
     <script>
         function generateRandomNumber() {
-            const minValue = parseInt(document.getElementById('minValue').value, 10);
-            const maxValue = parseInt(document.getElementById('maxValue').value, 10);
-            if (isNaN(minValue) || isNaN(maxValue) || minValue > maxValue) {
-                document.getElementById('result').innerText = 'Please enter valid minimum and maximum values.';
+            const minValue = parseInt(document.getElementById('minValue').value);
+            const maxValue = parseInt(document.getElementById('maxValue').value);
+            
+            if (isNaN(minValue) || isNaN(maxValue)) {
+                alert('Please enter valid numbers.');
                 return;
             }
+
+            if (minValue > maxValue) {
+                alert('Minimum value cannot be greater than maximum value.');
+                return;
+            }
+
             const randomNumber = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
             document.getElementById('result').innerText = `Random Number: ${randomNumber}`;
         }
     </script>
 </body>
 </html>
-
